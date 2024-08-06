@@ -18,7 +18,7 @@ export const errorHandler = (err, req, res, next) => {
 
     res.status(statusCode).json({
         message,
-        // This err.stack shoes us the complete trace about in which file the error occured
+        // This err.stack shows us the complete trace about in which file the error occured
         stack: process.env.NODE_ENV === 'production' ? null : err.stack
     });
 };
