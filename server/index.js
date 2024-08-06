@@ -14,10 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// User Auth routes
+// User routes
 app.use('/api/users', userRoutes);
 
-// We place our error handler middlewares at the bottom
+// Error handling middleware, for unknown routes and any other errors
 app.use(notFound);
 app.use(errorHandler);
 
