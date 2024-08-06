@@ -80,5 +80,9 @@ export const updateUserProfile = asyncHandler( async (req, res) => {
  * @access Public
  */
 export const logoutUser = asyncHandler( async (req, res) => {
-    res.status(200).json({msg: "Logout User"});
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0) // Cookie expires at the beginning of the UNIX epoch
+    });
+    res.status(200).json({msg: "Logged out successfully"});
 });
