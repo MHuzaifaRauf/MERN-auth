@@ -1,0 +1,1 @@
+## A simple MERN application that demonstrates how to apply authentication using JWT and HTTP-Only Cookie
