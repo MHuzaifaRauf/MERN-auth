@@ -1,6 +1,7 @@
 import express from 'express';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 
 // Connect to MongoDB
@@ -8,9 +9,10 @@ connectDB();
 
 const app = express();
 
-// Adding middleware to parse JSON request bodies
+// Adding middleware to parse JSON request bodies, form data, and cookies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // User Auth routes
 app.use('/api/users', userRoutes);
