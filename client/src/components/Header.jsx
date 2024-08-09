@@ -31,7 +31,7 @@ const Header = () => {
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>MERN App</Navbar.Brand>
+            <Navbar.Brand>MERN Auth Template</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
