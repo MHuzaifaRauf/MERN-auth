@@ -12,6 +12,20 @@ For more detailed information:
 - [Client README](./client/README.md)
 - [Server README](./server/README.md)
 
+## Application Screenshots
+
+### Home Page
+![Home Page](./client/src/assets/home_page.png)
+
+### Login Page
+![Login Page](./client/src/assets/login_page.png)
+
+### Profile Page
+![Profile Page](./client/src/assets/register_page.png)
+
+### Toast Notification
+![Toast Notification](./client/src/assets/toast_notification.png)
+
 ## Quick Start
 
 To run both the frontend and backend concurrently:
