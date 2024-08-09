@@ -22,7 +22,7 @@ To run both the frontend and backend concurrently:
  ```
    PORT=5000
    MONGO_URI=your_mongodb_connection_string
-   NODE_ENV=development
+   NODE_ENV=development/production
    JWT_SECRET=your_jwt_secret
    ```
 4. Install dependencies:
@@ -38,3 +38,33 @@ To run both the frontend and backend concurrently:
 This command will start both the server and client applications concurrently.
 
 Note: The server dependencies and scripts are managed from the root `package.json` for convenience in running the full stack application.
+
+## Deployment
+
+To deploy this application to a server:
+
+1. Build the React app:
+   ```
+   cd client
+   npm run build
+   ```
+
+2. Configure the server's `index.js` file:
+   Add the following code to serve the static files and handle client-side routing:
+
+   ```javascript
+   // Set-up to deploy app on a server
+   if (process.env.NODE_ENV === 'production') {
+       const __dirname = path.resolve();
+       app.use(express.static(path.join(__dirname, 'client/dist')));
+       app.get('*', (req, res) => {
+           res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+       });
+   }
+   ```
+
+   This configuration ensures that your server serves the React app's static files and handles client-side routing in production.
+
+3. Set the `NODE_ENV` environment variable to 'production' on your server.
+
+4. Deploy your application to your chosen hosting platform, ensuring that all environment variables are properly set.

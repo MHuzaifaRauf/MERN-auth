@@ -54,7 +54,7 @@ server/
    ```
    PORT=5000
    MONGO_URI=your_mongodb_connection_string
-   NODE_ENV=development
+   NODE_ENV=development/production
    JWT_SECRET=your_jwt_secret
    ```
 5. Start the server: `npm run server`
