@@ -5,8 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { clearCredentials } from '../slices/authSlice.js';
-import { useLogoutMutation } from '../slices/usersApiSlice.js';
+import { clearCredentials } from '../store/slices/authSlice.js';
+import { useLogoutMutation } from '../store/slices/usersApiSlice.js';
 
 const Header = () => {
   const { userInfo } = useSelector(state => state.auth);

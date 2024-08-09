@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useLoginMutation } from '../slices/usersApiSlice.js'
-import { setCredentials } from '../slices/authSlice.js'
+import { useLoginMutation } from '../store/slices/usersApiSlice.js'
+import { setCredentials } from '../store/slices/authSlice.js'
 
 import { toast } from 'react-toastify'
 
