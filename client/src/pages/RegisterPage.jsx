@@ -1,7 +1,16 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+
+import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { useRegisterMutation } from '../slices/usersApiSlice.js'
+import { setCredentials } from '../slices/authSlice.js'
+
+import { toast } from 'react-toastify'
+
 import FormContainer from '../components/FormContainer.jsx'
+import Loader from '../components/Loader.jsx'
 
 const RegisterPage = () => {
   const [name, setName] = useState('')
@@ -9,9 +18,33 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [register, { isLoading }] = useRegisterMutation()
+
+  const { userInfo } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/')
+    }
+  }, [navigate, userInfo])
+
   const submitHandler = async (e) => {
     e.preventDefault()
     // Send request to backend to authenticate user
+    if (password!== confirmPassword) {
+      toast.error('Passwords do not match')
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        dispatch(setCredentials({...res}));
+        navigate('/');
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   }
 
   return (
@@ -66,6 +99,8 @@ const RegisterPage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
+
+        { isLoading && <Loader /> }
 
         <Button type='submit' variant='primary' className='mt-3'>
           Sign Up
