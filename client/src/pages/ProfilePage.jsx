@@ -23,6 +23,8 @@ const ProfilePage = () => {
 
   const { userInfo } = useSelector((state) => state.auth)
 
+  const [updateProfile, { isLoading }] = useUpdateUserMutation()
+
   useEffect(() => {
     setName(userInfo.name)
     setEmail(userInfo.email)
@@ -34,7 +36,19 @@ const ProfilePage = () => {
     if (password!== confirmPassword) {
       toast.error('Passwords do not match')
     } else {
-      console.log("Submit");
+      try {
+        const res = await updateProfile({
+          _id: userInfo._id,
+          name,
+          email,
+          password,
+        }).unwrap();
+
+        dispatch(setCredentials({...res}));
+        toast.success('Profile updated successfully')
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
     }
   }
 
@@ -90,6 +104,8 @@ const ProfilePage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
+
+        { isLoading && <Loader />  }
 
         <Button type='submit' variant='primary' className='mt-3'>
           Update
