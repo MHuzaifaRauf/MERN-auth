@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 
-import { useSelector, useDispatch } from'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js'
 import { setCredentials } from '../slices/authSlice.js'
 
 import { toast } from'react-toastify'
 
 import FormContainer from '../components/FormContainer.jsx'
+import Loader from '../components/Loader.jsx'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
@@ -67,6 +68,8 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
+        { isLoading && <Loader />}
 
         <Button type='submit' variant='primary' className='mt-3'>
           Sign In
